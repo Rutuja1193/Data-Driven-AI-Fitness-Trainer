@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Fitness AI Trainer</title>
+    <style>
+        /* Define CSS custom properties (variables) here */
+        :root {
+            --title-color: #22CCA5;
+            --font-bold: bold;
+            --first-color-light: #22CCA5;
+            --text-color: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "montserrat";
+            color: #ffffff;
+            scroll-behavior: smooth;
+            border: none;
+            outline: none;
+        }
+        
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1b1b1b;
+        }
+
+        h1, h2, h3 {
+            color: var(--title-color);
+            font-weight: var(--font-bold);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .cal {
+            padding-bottom: 0;
+        }
+        .cal_container {
+            row-gap: 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two columns layout */
+            align-items: center; /* Vertically align content */
+        }
+        .cal_content {
+            text-align: left;
+            padding: 20px;
+        }
+        .cal_img {
+            width: 500px;
+            justify-self: right;
+        }
+        .cal_description {
+            text-align: left;
+            margin-bottom: 2.5rem;
+        }
+        .cal_form {
+            display: grid;
+            row-gap: 1rem;
+        }
+        .cal_box {
+            position: relative;
+            border: 1px solid var(--first-color-light);
+            border-radius: 3px;
+        }
+        .cal_input {
+            width: 100%;
+            background-color: transparent;
+            padding: 20px 56px 20px 24px;
+            outline: none;
+            border: none;
+            color: var(--text-color);
+        }
+        /* Removes the input navigation button */
+        .cal_input::-webkit-outer-spin-button, 
+        .cal_input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        .cal_label {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.25rem;
+            color: var(--text-color);
+        }
+        .cal_form .btn {
+            margin-top: 1.5rem;
+            padding: 10px 20px; /* Adjust button size */
+            font-size: 16px; /* Adjust button text size */
+            background-color: #22CCA5; /* Set button color */
+            color: #FFFFFF; /* Set text color */
+            border: none;
+            cursor: pointer;
+        }
+        .cal_msg {
+            position: absolute;
+            transform: translateY(1rem);
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+        <!-- ==================== CALCULATE ==================== -->
+        <section class="cal section">
+            <div class="cal_container container grid">
+                <div class="cal_content">
+                    <div class="section_titles">
+                        <h1 class="section_title-border">CALCULATE</h1>
+                        <h1 class="section_title">YOUR BMI</h1>
+                    </div>
+
+                    <p class="cal_description">
+                        The body mass index (BMI) calculator calculates 
+                        body mass index from your weight and height.
+                    </p>
+
+                    <form action="" class="cal_form" id="cal-form">
+                        <div class="cal_box">
+                            <input type="number" name="" placeholder="Height" id="cal-cm" class="cal_input">
+                            <label for="" class="cal_label">cm</label>
+                        </div>
+                        <div class="cal_box">
+                            <input type="number" name="" placeholder="Weight" id="cal-kg" class="cal_input">
+                            <label for="" class="cal_label">kg</label>
+                        </div>
+                        <button type="submit" class="btn btn_flex">
+                            Calculate BMI
+                        </button>
+                    </form>
+                    <p class="cal_msg" id="cal-msg"></p>
+                </div>
+                <img src="/static/images/choose-img.png" alt="BMI" class="cal_img">
+            </div>
+        </section>
+    <script>
+        /*=============== CALCULATE  BMI JS ===============*/
+        // Getting the relevant ID's
+        const calForm = document.getElementById('cal-form');
+        calCm = document.getElementById('cal-cm');
+        calKg = document.getElementById('cal-kg'),
+        calMsg = document.getElementById('cal-msg')
+        const calBmi = (e) =>{
+            e.preventDefault()
+            // Checking if the fields have a value
+            if(calCm.value === '' || calKg.value === ''){
+                // Add or remove color
+                calMsg.classList.remove('color-green'),
+                calMsg.classList.add('color-red')
+                // Show message
+                calMsg.textContent = 'Fill in your Height and Weight 🏋️'
+                // Remove message in 3secs
+                setTimeout(()=>{
+                    calMsg.textContent = ''
+                }, 5000)
+            }else{
+                // BMI Formula
+                const cm = calCm.value / 100,
+                      kg = calKg.value,
+                      bmi = Math.round(kg / (cm * cm))
+                //Status Report
+                 if(bmi < 18.5){
+                    // Add colour and display message
+                    calMsg.classList.add('color-green')
+                    calMsg.textContent = `Your BMI is ${bmi}lbs and you are underweight 😒!`
+            
+                 }else if(bmi < 25){
+                    // Add colour and display message
+                    calMsg.classList.add('color-green')
+                    calMsg.textContent = `Your BMI is ${bmi}lbs and you are healthy 👌!`
+            
+                 }else{
+                    calMsg.classList.add('color-green')
+                    calMsg.textContent = `Your BMI is ${bmi}lbs and you are overweight 😴!`
+                 }
+                //  To clear imput field
+                calCm.value = ''
+                calKg.value = ''
+                // Remove all messages for 5secs
+                setTimeout(()=>{
+                calMsg.textContent = ''
+                }, 5000)
+            }
+        }
+        calForm.addEventListener('submit', calBmi)
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exercise Recommendations</title>
+    <style>
+            body {
+                background-image: url("/static/images/background.jpeg"); /* Replace with the correct path to your image */
+                background-size: cover; /* Adjust as needed to cover the whole screen */
+                background-repeat: no-repeat;
+                background-attachment: fixed; /* Keeps the background fixed while the content scrolls */
+                text-align: center; /* Center align the content */
+                padding: 50px; /* Add some padding to the content */
+                font-family: Arial, sans-serif; /* Use a suitable font-family */
+            }
+    
+            div {
+                background-color: transparent; /* Set the background of the div to be transparent */
+                width: 300px;
+                padding: 50px;
+                margin: 20px;
+            }
+        h1, h2, ul {
+            color: white; /* Set the color of headings and lists to be visible against the background */
+        }
+
+        ul {
+            list-style: none; /* Remove bullet points from the list */
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px; /* Add some space between list items */
+        }
+
+        a {
+            color: #3498db; /* Set link color */
+            text-decoration: none; /* Remove underline */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Add underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Exercise Recommendations</h1>
+    
+    <h2>Recommended Exercises:</h2>
+    <ul>
+        {% for exercise in recommended_exercises %}
+            <li>{{ exercise }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- <p><a href="recommendation_form.html">Go back to input form</a></p> -->
+</body>
+</html>
+

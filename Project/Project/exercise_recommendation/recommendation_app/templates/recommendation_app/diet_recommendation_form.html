@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diet Recommendation</title>
+    <style>
+        /* Add CSS for the background image */
+        body {
+            background-image: url("/static/images/background.jpeg"); 
+            background-size: cover; /* Adjust as needed to cover the whole screen */
+                background-color: #f0f0f0; /* Set your desired background color */
+                font-family: Arial, sans-serif; /* Use a suitable font-family */
+                text-align: center; /* Center align text within the body */
+            }
+            
+            .form-container {
+                margin: 50px auto;
+                padding: 20px;
+                max-width: 400px;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            label {
+                display: block;
+                margin-bottom: 5px;
+                text-align: left;
+            }
+            
+            input, select {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+            
+            button {
+                padding: 10px 20px;
+                background-color: #008CBA;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            
+            button:hover {
+                background-color: #005f6b;
+            }
+        
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Diet Recommendation</h1>
+
+        <form method="post" action="{% url 'diet_recommendation_form' %}">
+            {% csrf_token %}
+            
+            <label for="age">Age:</label>
+            <input type="number" name="age" id="age" required>
+            <br>
+
+            <label for="weight">Weight (kg):</label>
+            <input type="number" name="weight" id="weight" required>
+            <br>
+
+            <label for="height">Height (cm):</label>
+            <input type="number" name="height" id="height" required>
+            <br>
+
+            <label for="goals">Diet Goals:</label>
+            <select name="goals" id="goals">
+                <option value="lose_weight">Lose Weight</option>
+                <option value="build_muscle">Build Muscle</option>
+            </select>
+            <br>
+
+            <label for="allergies">Allergies (comma-separated, e.g., Dairy,Eggs):</label>
+            <input type="text" name="allergies" id="allergies">
+            <br>
+
+            <label>Are you vegetarian?</label>
+            <input type="radio" name="is_vegetarian" value="yes" id="vegetarian_yes">
+            <label for="vegetarian_yes">Yes</label>
+
+            <input type="radio" name="is_vegetarian" value="no" id="vegetarian_no">
+            <label for="vegetarian_no">No</label>
+            <br>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if recommended_foods %}
+        <h2>Recommended Foods</h2>
+        <h3>Breakfast:</h3>
+        <ul>
+            {% for food in recommended_foods.breakfast %}
+                <li>{{ food }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Lunch:</h3>
+        <ul>
+            {% for food in recommended_foods.lunch %}
+                <li>{{ food }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Dinner:</h3>
+        <ul>
+            {% for food in recommended_foods.dinner %}
+                <li>{{ food }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    </div>
+</body>
+</html>

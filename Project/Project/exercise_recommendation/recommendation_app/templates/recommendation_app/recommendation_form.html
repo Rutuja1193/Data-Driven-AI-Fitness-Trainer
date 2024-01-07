@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exercise Recommendation Form</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+    <style>
+        /* Add CSS for the background image */
+        body {
+            background-image: url("/static/images/background.jpeg"); /* Replace 'background.jpg' with your image file name */
+            background-size: cover; /* Adjust as needed to cover the whole screen */
+        }
+        body {
+            background-color: #f0f0f0; /* Set your desired background color */
+            font-family: Arial, sans-serif; /* Use a suitable font-family */
+            text-align: center; /* Center align text within the body */
+        }
+        
+        .form-container {
+            margin: 50px auto;
+            padding: 20px;
+            max-width: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #005f6b;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+    <h1>Workout Plan Recommendation</h1>
+    
+
+    <form method="post" action="{% url 'recommendation_form' %}">
+        {% csrf_token %}
+
+        <label for="goals">Exercise Goals:</label>
+        <select name="goals" id="goals">
+            <option value="lose_weight">Lose Weight</option>
+            <option value="build_muscle">Build Muscle</option>
+            <option value="improve_endurance">Improve_endurance</option>
+            <option value="increase_flexibility">Increase_flexibility</option>
+            <option value="total_body_fitness">Total_body_fitness</option>
+        </select>
+        <br>
+
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age" required>
+        <br>
+
+        <label for="weight">Weight (kg):</label>
+        <input type="number" name="weight" id="weight" required>
+        <br>
+
+        <label for="health_conditions">Health Conditions:</label>
+        <input type="checkbox" name="health_conditions" id="health_conditions_thyroid" value="thyroid">
+        <label for="health_conditions_thyroid">Thyroid</label>
+        <input type="checkbox" name="health_conditions" id="health_conditions_heart" value="heart">
+        <label for="health_conditions_heart">Heart Diseases</label>
+        <input type="checkbox" name="health_conditions" id="health_conditions_cancer" value="cancer">
+        <label for="health_conditions_cancer">Cancer</label>
+        <input type="checkbox" name="health_conditions" id="health_conditions_diabetes" value="diabetes">
+        <label for="health_conditions_diabetes">Diabetes</label>
+        <input type="checkbox" name="health_conditions" id="health_conditions_asthma" value="asthma">
+        <label for="health_conditions_asthma">Asthma</label>
+        <input type="checkbox" name="health_conditions" id="health_conditions_none" value="none">
+        <label for="health_conditions_none">None</label>
+<!-- Add more checkboxes as needed -->
+
+        <br>
+
+
+        <button type="submit">Submit</button>
+    </form>
+    </div>
+    
+    
+
+
+<!-- ... Rest of your HTML ... -->
+
+</body>
+</html>
+

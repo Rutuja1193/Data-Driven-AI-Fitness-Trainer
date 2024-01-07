@@ -1,0 +1,32 @@
+<!-- nutrition_app/templates/recommendations.html -->
+<!-- recommendations.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recommended Foods</title>
+</head>
+<body>
+    <h1>Recommended Foods</h1>
+    <h2>Breakfast:</h2>
+    <ul>
+        {% for food in recommended_foods.breakfast %}
+            <li>{{ food }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Lunch:</h2>
+    <ul>
+        {% for food in recommended_foods.lunch %}
+            <li>{{ food }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Dinner:</h2>
+    <ul>
+        {% for food in recommended_foods.dinner %}
+            <li>{{ food }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+

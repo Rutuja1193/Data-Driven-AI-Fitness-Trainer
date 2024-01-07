@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Fitness Trainer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column; 
+            justify-content: flex-start;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('/static/images/bgimage.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            left: 100px;
+            top: 50%;
+            color: #ffffff;
+        }
+        .video-container {
+            height: 250px;
+            width: 800px;
+            align-self: left;
+            left: 2px;
+            top: 2px;
+        }
+        #video-stream {
+            height: auto;
+            width: auto;
+        }
+        .image-container {
+            width: 40%;
+        }
+        .description {
+            font-size: 20px;
+            text-align: left;
+            left: 100px;
+            top: 50%;
+            color: #ffffff;
+            margin-top: 20px
+        }
+        .description h1 {
+            font-size: 20px;
+            text-align: left;
+            left: 100px;
+            top: 50%;
+            color: #ffffff;
+        }
+
+        .description p {
+            font-size: 18px;
+            text-align: left;
+            left: 100px;
+            top: 50%;
+            color:  #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="{% url 'ai_fitness_trainer' %}">
+        {% csrf_token %}
+
+    <div class="content">
+       <div class="video-container">
+            <video id="video-stream" autoplay></video>
+        </div>
+        <div class="content">
+            <h1>Hello! Hope you're having a great day.</h1>
+            <p>Let's Hustle</p>
+        </div>
+    </div>
+    <script>
+        // JavaScript code to access the webcam and display the video stream
+        async function setupWebcam() {
+            const videoElement = document.getElementById('video-stream');
+            const stream = await navigator.mediaDevices.getUserMedia({ 'video': true });
+            videoElement.srcObject = stream;
+        }
+        
+        window.addEventListener('DOMContentLoaded', (event) => {
+            setupWebcam();
+        });
+    </script>
+</body>
+</html>
