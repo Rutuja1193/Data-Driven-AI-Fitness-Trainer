@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "montserrat";
+    color: #171717;
+    scroll-behavior: smooth;
+    border: none;
+    outline: none;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #171717;
+    background-size: cover;
+    background-position: center;
+}
+
+.add-button {
+    position: absolute; /* Keep it as absolute positioning */
+    top: 30%; /* Adjust the top value to position it below the description */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #22CCA5;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 1;
+    transition: background-color 0.3s;
+}
+
+.nav-panel {
+  background-color: #22CCA5;
+  width: 150px;
+  height: 100vh;
+  position: fixed;
+}
+
+.nav-panel button {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #22CCA5;
+  padding: 20px;
+  color: white;
+  cursor: pointer;
+  text-align: left;
+}
+.nav-panel button:hover {
+  background-color: #16b394;
+}
+
+.description{
+  position: absolute;
+  top: 10%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+  color: #fff;
+  padding: 10px; /* Add padding to create space for the button */
+}
+
+.description h1{
+  font-size: 36px;
+  margin-bottom: 10px;
+  top: 10%;
+  left: 40%;
+  color: #fff;
+}
+
+.description1 {
+  font-size: 30px;
+  top: 50%;
+  left: 60%;
+  color: #fff;
+}
+
+.bottom-right-image {
+    width: 50px; /* Adjust as needed */
+    height: 50px; /* Adjust as needed */
+    margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+    <div class="nav-panel">
+        <button>Back</button>      
+    </div>
+    <div class="description">
+    <h1>My Fitness Goals</h1>
+    </div>
+    <form id="goal-form">
+        <input class="description1" type="text" id="goal" placeholder="Enter your fitness goal">
+        <button class="add-button" id="add-goal">Add Goal</button>
+    </form>
+    <div id="goals-list">
+        <!-- To-do list will be dynamically generated here -->
+    </div>
+    <div id="pie-chart">
+        <!-- Pie chart will be displayed here -->
+    </div>
+    <!--<div class="bottom-right-image">
+        <img src="c:\Users\sawan\Downloads\AI Fitness Trainer\ai trainer.png" alt="Your Image">
+    </div>-->
+    <script>
+        // Add an event listener to the "Add Goal" button
+document.getElementById("add-goal").addEventListener("click", function() {
+    const goalInput = document.getElementById("goal");
+    const goalText = goalInput.value.trim();
+
+    if (goalText !== "") {
+        // Create a new list item for the goal
+        const goalItem = document.createElement("li");
+        goalItem.innerHTML = `<input type="checkbox" class="goal-checkbox">${goalText}`;
+        
+        // Add the goal item to the goals list
+        document.getElementById("goals-list").appendChild(goalItem);
+
+        // Update the pie chart
+        updatePieChart();
+        
+        // Clear the input field
+        goalInput.value = "";
+    }
+});
+
+// Function to update the pie chart
+function updatePieChart() {
+    const completedGoals = document.querySelectorAll(".goal-checkbox:checked").length;
+    const totalGoals = 10; // You can customize this based on your requirement
+
+    // Calculate the percentage completed
+    const percentageCompleted = (completedGoals / totalGoals) * 100;
+
+    // Update the pie chart (You'll need to use a charting library here)
+    // Example using Chart.js:
+    // chart.data.datasets[0].data = [percentageCompleted, 100 - percentageCompleted];
+    // chart.update();
+}
+    </script>
+</body>
+</html>
